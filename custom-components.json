@@ -1,0 +1,10 @@
+{
+  "sensor.cryptoportfolio": {
+    "updated_at": "2021-07-31",
+    "version": "0.0.1",
+    "local_location": "/custom_components/cryptoportfolio/sensor.py",
+    "remote_location": "https://raw.githubusercontent.com/wsdt/hassio_cryptoportfolio/master/custom_components/cryptoportfolio/sensor.py",
+    "visit_repo": "https://github.com/wsdt/hassio_cryptoportfolio",
+    "changelog": "https://github.com/wsdt/hassio_cryptoportfolio"
+  }
+}

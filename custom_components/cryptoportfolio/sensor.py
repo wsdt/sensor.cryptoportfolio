@@ -1,3 +1,5 @@
+"""/config/custom_components/cryptoportfolio"""
+
 """Support for Etherscan sensors."""
 from datetime import timedelta
 import requests

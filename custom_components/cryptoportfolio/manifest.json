@@ -1,8 +1,8 @@
 {
   "domain": "cryptoportfolio",
   "name": "CryptoPortfolio",
-  "documentation": "https://www.home-assistant.io/integrations/cryptoportfolio",
+  "documentation": "https://github.com/wsdt/hassio_cryptoportfolio",
   "requirements": [],
-  "codeowners": [],
+  "codeowners": ["@wsdt"],
   "iot_class": "cloud_polling"
 }
