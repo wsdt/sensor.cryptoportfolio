@@ -3,6 +3,7 @@
 """Support for Etherscan sensors."""
 from datetime import timedelta
 import requests
+import logging
 
 # import requests
 import voluptuous as vol
@@ -17,9 +18,11 @@ ATTRIBUTION = "Data provided by blockchain explorers"
 
 SCAN_INTERVAL = timedelta(minutes=5)
 
+_LOGGER = logging.getLogger(__name__)
+
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
-        vol.Required(CONF_ADDRESS): cv.string,
+        vol.Required(CONF_ADDRESS): cv.string,  # TODO: [cv.string] == Array
         vol.Optional(CONF_NAME): cv.string,
         vol.Optional(CONF_TOKEN): cv.string,
         vol.Optional(CONF_TOKEN_ADDRESS): cv.string,
@@ -41,6 +44,10 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     token = config.get(CONF_TOKEN)
     token_address = config.get(CONF_TOKEN_ADDRESS)
     decimals = config.get(CONF_DECIMALS)
+
+    if not explorer_api_key:
+        _LOGGER.error("No api key provided.")
+        return False
 
     if not explorer_api_url or not main_coin:
         """Default blockchain"""
