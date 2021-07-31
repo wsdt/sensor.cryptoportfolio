@@ -48,7 +48,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     if not blockchain:
         blockchain = SUPPORTED_BLOCKCHAIN_ETHORFORK
 
-    if blockchain is SUPPORTED_BLOCKCHAIN_ETHORFORK:
+    if blockchain == SUPPORTED_BLOCKCHAIN_ETHORFORK:
 
         if not explorer_api_key:
             _LOGGER.error("No api key provided for ETH or fork.")
@@ -76,7 +76,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
         add_entities([ETHorForkPortfolioSensor(main_coin, explorer_api_url, explorer_api_key, name, address, token,
                                                token_address, decimals)], True)
 
-    elif blockchain is SUPPORTED_BLOCKCHAIN_BTC:
+    elif blockchain == SUPPORTED_BLOCKCHAIN_BTC:
         if not name:
             name = "BTC Balance"
 
