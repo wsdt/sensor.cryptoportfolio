@@ -8,7 +8,7 @@ import requests
 import voluptuous as vol
 
 from homeassistant.components.sensor import PLATFORM_SCHEMA, SensorEntity
-from constants import CONF_ADDRESS, CONF_NAME, CONF_TOKEN, CONF_TOKEN_ADDRESS, CONF_EXPLORER_API_URL, CONF_MAIN_COIN, \
+from .constants import CONF_ADDRESS, CONF_NAME, CONF_TOKEN, CONF_TOKEN_ADDRESS, CONF_EXPLORER_API_URL, CONF_MAIN_COIN, \
     CONF_EXPLORER_API_KEY
 from homeassistant.const import ATTR_ATTRIBUTION
 import homeassistant.helpers.config_validation as cv
