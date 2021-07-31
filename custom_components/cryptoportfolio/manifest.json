@@ -3,6 +3,5 @@
   "name": "CryptoPortfolio",
   "documentation": "https://github.com/wsdt/hassio_cryptoportfolio",
   "requirements": [],
-  "codeowners": ["@wsdt"],
-  "iot_class": "cloud_polling"
+  "codeowners": ["@wsdt"]
 }
