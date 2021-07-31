@@ -120,7 +120,7 @@ class CryptoPortfolioSensor(SensorEntity):
     def fetch_value(self, params):
         r = requests.get(url=self._explorer_api_url, params=params)
         data = r.json()
-        return data['result'] / (10 ** self._decimals)
+        return int(data['result']) / (10 ** self._decimals)
 
     def update(self):
         """Get the latest state of the sensor."""
