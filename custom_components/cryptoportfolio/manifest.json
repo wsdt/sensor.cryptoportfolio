@@ -1,7 +1,8 @@
 {
   "domain": "cryptoportfolio",
-  "name": "CryptoPortfolio",
+  "name": "Crypto Portfolio",
   "documentation": "https://github.com/wsdt/hassio_cryptoportfolio",
   "requirements": [],
-  "codeowners": ["@wsdt"]
+  "codeowners": ["@wsdt"],
+  "version": "0.0.1"
 }
