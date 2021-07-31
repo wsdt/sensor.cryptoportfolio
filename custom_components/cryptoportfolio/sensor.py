@@ -9,7 +9,7 @@ import voluptuous as vol
 
 from homeassistant.components.sensor import PLATFORM_SCHEMA, SensorEntity
 from .constants import CONF_ADDRESS, CONF_NAME, CONF_TOKEN, CONF_TOKEN_ADDRESS, CONF_EXPLORER_API_URL, CONF_MAIN_COIN, \
-    CONF_EXPLORER_API_KEY
+    CONF_EXPLORER_API_KEY, CONF_DECIMALS
 from homeassistant.const import ATTR_ATTRIBUTION
 import homeassistant.helpers.config_validation as cv
 
@@ -25,6 +25,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
         vol.Optional(CONF_TOKEN_ADDRESS): cv.string,
         vol.Optional(CONF_EXPLORER_API_URL, default="https://api.etherscan.io/api"): cv.string,
         vol.Optional(CONF_MAIN_COIN, default="ETH"): cv.string,
+        vol.Optional(CONF_DECIMALS, default=18): cv.positive_int,
         vol.Optional(CONF_EXPLORER_API_KEY): cv.string,
     }
 )
@@ -39,6 +40,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
     name = config.get(CONF_NAME)
     token = config.get(CONF_TOKEN)
     token_address = config.get(CONF_TOKEN_ADDRESS)
+    decimals = config.get(CONF_DECIMALS)
 
     if not explorer_api_url or not main_coin:
         """Default blockchain"""
@@ -51,16 +53,22 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
         token = token.upper()
         if not name:
             name = f"{token} Balance"
+        if not decimals:
+            decimals = 9  # default value for tokens
+    elif not decimals:
+        decimals = 18
+
     if not name:
         name = f"{main_coin} Balance"
 
-    add_entities([CryptoPortfolioSensor(main_coin, explorer_api_url, explorer_api_key, name, address, token, token_address)], True)
+    add_entities([CryptoPortfolioSensor(main_coin, explorer_api_url, explorer_api_key, name, address, token,
+                                        token_address, decimals)], True)
 
 
 class CryptoPortfolioSensor(SensorEntity):
     """Representation of an CryptoPortfolio sensor."""
 
-    def __init__(self, main_coin, explorer_api_url, explorer_api_key, name, address, token, token_address):
+    def __init__(self, main_coin, explorer_api_url, explorer_api_key, name, address, token, token_address, decimals):
         """Initialize the sensor."""
         self._main_coin = main_coin
         self._explorer_api_url = explorer_api_url
@@ -68,9 +76,14 @@ class CryptoPortfolioSensor(SensorEntity):
         self._name = name
         self._address = address
         self._token_address = token_address
+        self._decimals = decimals
         self._token = token
         self._state = None
         self._unit_of_measurement = self._token or main_coin
+
+    @property
+    def decimals(self):
+        return self._decimals
 
     @property
     def main_coin(self):
@@ -107,7 +120,7 @@ class CryptoPortfolioSensor(SensorEntity):
     def fetch_value(self, params):
         r = requests.get(url=self._explorer_api_url, params=params)
         data = r.json()
-        return data['result']
+        return data['result'] / (10 ** self._decimals)
 
     def update(self):
         """Get the latest state of the sensor."""
