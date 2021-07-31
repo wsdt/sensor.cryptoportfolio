@@ -1,5 +1,6 @@
 {
     "name": "Crypto Portfolio for Home Assistant",
     "render_readme": true,
-    "domains": "sensor"
+    "domains": ["sensor"],
+    "iot_class": "Cloud Polling"
 }
