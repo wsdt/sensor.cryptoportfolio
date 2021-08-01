@@ -1,6 +1,10 @@
 # // Crypto Portfolio
+Install this Hassio integration via HACS.
+
 
 ## Params
+Add this to your `configuration.yaml`.
+
 ### Configuration for Ethereum or Ethereum forks such as Binance Smart Chain, ..
 
 - address __required__
