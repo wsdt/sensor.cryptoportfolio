@@ -1,4 +1,4 @@
-# // Crypto Portfolio [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://bitbucket.org/lbesson/ansi-colors) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) [![GitHub license](https://img.shields.io/github/license/wsdt/sensor.cryptoportfolio.svg)](https://github.com/wsdt/sensor.cryptoportfolio/blob/master/LICENSE) [![Donate](https://img.shields.io/badge/Donate-Pay%20me%20a%20coffee-3cf)](https://github.com/wsdt/Global/wiki/Donation) [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/kevin.riedl.privat%40gmail.com)
+# Crypto Portfolio [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://bitbucket.org/lbesson/ansi-colors) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) [![GitHub license](https://img.shields.io/github/license/wsdt/sensor.cryptoportfolio.svg)](https://github.com/wsdt/sensor.cryptoportfolio/blob/master/LICENSE) [![Donate](https://img.shields.io/badge/Donate-Pay%20me%20a%20coffee-3cf)](https://github.com/wsdt/Global/wiki/Donation) [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/kevin.riedl.privat%40gmail.com)
 Install this Hassio integration via HACS.
 
 
@@ -42,5 +42,27 @@ sensor:
   - platform: cryptoportfolio
     address: "...."
     explorer_api_key: "...."
+    
+  - platform: cryptoportfolio
+    address: "...."
+    blockchain: "BTC"
 ```
 
+---
+
+## Sum up balances from different wallets
+
+```
+  - platform: template
+    sensors:
+      eth_total:
+        friendly_name: "ETH (total)"
+        unit_of_measurement: 'ETH'
+        value_template: "{{ states('sensor.Anon_ETH') |float + states('sensor.HW_ETH') | float }}"
+      usdc_total:
+        friendly_name: "USDC/T (total, incl. staked)"
+        unit_of_measurement: 'USDC/T'
+        value_template: "{{ states('sensor.USDC') |float + states('sensor.HW_USDC') | float + states('sensor.HW_staked_USDC') | float + states('sensor.HW_staked_USDT') | float}}"
+
+
+```
