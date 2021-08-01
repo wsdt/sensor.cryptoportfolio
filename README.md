@@ -1,5 +1,28 @@
 # // Crypto Portfolio
 
+## Params
+Configuration for Ethereum or Ethereum forks such as Binance Smart Chain, ..
+
+address __required__
+name
+token
+token_address (if not provided, then main coin is used, e.g. ETH, BNB)
+explorer_api_key
+main_coin (default: `ETH`)
+explorer_api_url (default: `https://api.etherscan.io/api`)
+decimals (default: `18`)
+blockchain (default: `ETH_OR_FORK`)
+
+---
+
+Configuration for BTC.
+
+address __required__
+name
+blockchain: "BTC"
+(rest of the parameters is ignored)
+
+---
 
 ## Examples
 
