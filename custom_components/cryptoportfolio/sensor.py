@@ -12,11 +12,15 @@ from .constants import CONF_ADDRESS, CONF_NAME, CONF_TOKEN, CONF_TOKEN_ADDRESS, 
     CONF_EXPLORER_API_KEY, CONF_DECIMALS, CONF_BLOCKCHAIN, SUPPORTED_BLOCKCHAINS, SUPPORTED_BLOCKCHAIN_ETHORFORK, SUPPORTED_BLOCKCHAIN_BTC
 from .ETHorForkPortfolioSensor import ETHorForkPortfolioSensor
 from .BTCPortfolioSensor import BTCPortfolioSensor
+from .BlockChainInfoQueue import BlockChainInfoQueue
+
 import homeassistant.helpers.config_validation as cv
 
 SCAN_INTERVAL = timedelta(minutes=5)
 
 _LOGGER = logging.getLogger(__name__)
+
+blockChainInfoQueue = BlockChainInfoQueue()
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
@@ -80,7 +84,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
         if not name:
             name = "BTC Balance"
 
-        add_entities([BTCPortfolioSensor(name, address)], True)
+        add_entities([BTCPortfolioSensor(name, address, blockChainInfoQueue)], True)
 
 
     else:
