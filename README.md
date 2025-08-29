@@ -18,7 +18,7 @@ Add this to your `configuration.yaml`.
 - token_address (if not provided, then main coin is used, e.g. ETH, BNB)
 - explorer_api_key
 - main_coin (default: `ETH`)
-- explorer_api_url (default: `https://api.etherscan.io/api`)
+- explorer_api_url (default: `https://api.etherscan.io/v2/api?chainid=1`)
 - decimals (default: `18`)
 - blockchain (default: `ETH_OR_FORK`)
 
