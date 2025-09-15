@@ -28,7 +28,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
         vol.Optional(CONF_NAME): cv.string,
         vol.Optional(CONF_TOKEN): cv.string,
         vol.Optional(CONF_TOKEN_ADDRESS): cv.string,
-        vol.Optional(CONF_EXPLORER_API_URL, default="https://api.etherscan.io/api"): cv.string,
+        vol.Optional(CONF_EXPLORER_API_URL, default="https://api.etherscan.io/v2/api?chainid=1"): cv.string,
         vol.Optional(CONF_MAIN_COIN, default="ETH"): cv.string,
         vol.Optional(CONF_DECIMALS, default=18): cv.positive_int,
         vol.Optional(CONF_EXPLORER_API_KEY): cv.string,
@@ -60,7 +60,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
 
         if not explorer_api_url or not main_coin:
             """Default blockchain"""
-            explorer_api_url = "https://api.etherscan.io/api"
+            explorer_api_url = "https://api.etherscan.io/v2/api?chainid=1"
             main_coin = "ETH"
 
         main_coin = main_coin.upper()
